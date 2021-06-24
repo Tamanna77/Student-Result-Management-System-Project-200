@@ -4,6 +4,44 @@ void  Student_pass();
 int main();
 
 
+void After_reg()
+{
+
+    int ch;
+    cout<<"\t\t\t\t\t\t\t 1.Login"<<endl<<endl;
+    cout<<"\t\t\t\t\t\t\t 2.Main Menu"<<endl<<endl;
+    cout<<"\t\t\t\t\t \t\t Enter Choice: ";
+    cin>>ch;
+    switch(ch)
+    {
+    case 1:
+        system("cls");
+        Stdnt_login();
+        break;
+    case 2:
+        system("cls");
+        main();
+        break;
+    default:
+        cout<<"\n\t\t\t\t\t           Invalid Choice!\n\n\t\t\t\           For Choice Again Enter 1 Or Enter 0 For Main Menu."<<endl;
+        int c;
+        cout<<"\n\t\t\t\t\t           Enter 1/0: ";
+        cin>>c;
+        switch(c)
+        {
+        case 1:
+            After_reg();
+            break;
+        case 2:
+            break;
+        }
+
+    }
+}
+//---------------------------------------------------------------------------End Of  After Registration  Part--------------------------------------------------------------------------------------------
+
+
+
 /*                                                             #################################
                                                                 #          This Part For Student_Registration         #
                                                                 #################################
@@ -39,6 +77,7 @@ void Stdnt_reg()
     file.close();
     cout<<"\t\t\t\t\t\t   Registration successfull"<<endl<<endl;
 
+    After_reg();
 }
 //-----------------------------------------------------------------    ----End Of Student Registration Part--------------------------------------------------------------------------------------------
 
@@ -79,10 +118,10 @@ void Student_pass()
         system("cls");
         Stdnt_reg();
         break;
-   /* case 2:
+    case 2:
         system("cls");
         Stdnt_login();
-        break; */
+        break;
     case 3:
         system("cls");
         main();
