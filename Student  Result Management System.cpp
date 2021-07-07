@@ -1,13 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
-using namespace std;
 void  Student_pass();
 void Stdnt_login();
 int main();
-
-/*                                                             #################################
-                                                                #          This Part For Login Boolean Function     #
-                                                                #################################
+/*                                                          ######################################
+                                                            #This Part For Login Boolean Function#
+                                                            ######################################
 */
 bool IsLoggedIn()
 {
@@ -46,6 +44,11 @@ bool IsLoggedIn()
 //---------------------------------------------------------------------------End Of  Bool IsLogin  Part--------------------------------------------------------------------------------------------
 
 
+
+/*                                                             #################################
+                                                               #This Part For After_Registration #
+                                                               ##################################
+*/
 void After_reg()
 {
 
@@ -84,9 +87,11 @@ void After_reg()
 
 
 
-/*                                                             #################################
-                                                                #          This Part For Student_Registration         #
-                                                                #################################
+
+
+/*                                                            ###################################
+                                                              #This Part For Student_Registration#
+                                                              ####################################
 */
 void Stdnt_reg()
 {
@@ -119,13 +124,13 @@ void Stdnt_reg()
     file.close();
     cout<<"\t\t\t\t\t\t   Registration successfull"<<endl<<endl;
 
-    After_reg();
 }
 //-----------------------------------------------------------------    ----End Of Student Registration Part--------------------------------------------------------------------------------------------
 
 
-/*                                                             #################################
-                                                                #          This Part For Student_Logi n                    #
+
+/*                                                              #################################
+                                                                # This Part For Student_Logi n   #
                                                                 #################################
 */
 void Stdnt_login()
@@ -184,9 +189,13 @@ void Stdnt_login()
 
 
 
+
+
+
+
 /*                                                             #################################
-                                                                #          This Part For Student_Pass                        #
-                                                                #################################
+                                                               #   This Part For Student_Pass  #
+                                                               #################################
 */
 void Student_pass()
 {
@@ -194,11 +203,11 @@ void Student_pass()
 
 
     cout<<endl<<endl<<endl<<endl;
-    cout<<"\t\t\t      ####################################################################"<<endl;
+    cout<<"\t\t\t                              ####################################################################"<<endl;
     cout<<endl;
     cout<<"\t\t\t                               For See  Updates\n\t\t\t\t\tYou Have To Registration and Login The System"<<endl;
     cout<<endl;
-    cout<<"\t\t\t      ####################################################################"<<endl;
+    cout<<"\t\t\t                              ####################################################################"<<endl;
     cout<<endl<<endl;
 
     cout<<"\t\t\t\t\t\t\t1: REGISTRATION"<<endl<<endl;
@@ -253,6 +262,106 @@ void Student_pass()
 
 
 
+
+
+
+
+/*                                                                     #################################
+                                                                       #      Admin_Login  Part         #
+                                                                       #################################  */
+void Admin_Login()
+{
+    cout<<"\t\t\t       ##############################################################"<<endl;
+    cout<<endl;
+    cout<<"\t\t\t\t\t           Welcome To Admin Panel"<<endl;
+    cout<<endl;
+    cout<<"\t\t\t       ##############################################################"<<endl;
+    cout<<endl<<endl;
+
+    int ch;
+
+    cout<<"\t\t\t\t\t           1. Add  Result For New Student"<<endl<<endl;
+    cout<<"\t\t\t\t\t           2. Modify Previous Result"<<endl<<endl;
+    cout<<"\t\t\t\t\t           3. Delete Any Record"<<endl<<endl;
+    cout<<"\t\t\t\t\t           4. Change Admin Password"<<endl<<endl;
+    cout<<"\t\t\t\t\t           5. Go To Main Menu"<<endl<<endl;
+    cout<<"\t\t\t\t\t           6. Close Application!"<<endl<<endl;
+    cout<<"\t\t\t\t\t           Choice Option: ";
+
+    cin>>ch;
+    switch(ch)
+    {
+    case 1:
+        system("cls");
+   //     Add_Result();
+        break;
+    case 2:
+        system("cls");
+//        Modify_Result();
+        break;
+    case 3:
+        system("cls");
+//        Delete_Any_Record();
+        break;
+    case 4:
+        system("cls");
+//        Change_Admin_Pass();
+        break;
+    case 5:
+        system("cls");
+        main();
+        break;
+    case 6:
+        break;
+    default:
+        cout<<"\n\t\t\t\t\t           Invalid Choice!\n\n\t\t\t\           For Choice Again Enter 1 Or Enter 0 For Main Menu."<<endl;
+        int c;
+        cout<<"\n\t\t\t\t\t           Enter 1/0: ";
+        cin>>c;
+        switch(c)
+        {
+        case 1:
+            system("cls");
+            Admin_Login();
+            break;
+        case 2:
+            break;
+        }
+    }
+}
+//----------------------------------------------------------------------End Of Admin_Login--------------------------------------------------------------------------------------------------
+
+
+
+/*                                                                     #################################
+                                                                        #    Admin_Pass  Part         #                   #
+                                                                       #################################  */
+void Admin_pass()
+{
+    string c,ch;
+    cout<<"\n\t\t\t\t\t           Enter Pass: ";
+    cin>>c;
+    ifstream pass;
+    pass.open("Admin_pass.txt");
+    getline(pass,ch);
+    if(ch==c)
+    {
+        system("cls");
+        Admin_Login();
+    }
+    else
+    {
+
+        cout<<"\t\t\t\t\tInvalid Password! Please try agin!!!"<<endl<<endl;
+        Admin_pass();
+
+    }
+}
+//-----------------------------------------------------------------------------Admin_PassWord--------------------------------------------------------------------------------------------------
+
+
+
+
 int main()
 {
 
@@ -277,9 +386,9 @@ int main()
         system("cls");
         Student_pass();
         break;
-   /* case 2:
+    case 2:
         Admin_pass();
-        break; */
+        break;
     case 3:
         exit(0);
 
