@@ -261,8 +261,102 @@ void Student_pass()
 //-----------------------------------------------------------------------------End Of Student_Pass Part--------------------------------------------------------------------------------------------
 
 
+/*                                                                     #################################
+                                                                       #  Result Adding Part For Admin  #
+                                                                       #################################  */
+
+void Add_Result()
+{
+    cout<<endl<<endl;
+    cout<<"                                         ################################## "<<endl;
+    cout<<"                                         #                                #"<<endl;
+    cout<<"                                         #      Fill This Information     #"<<endl;
+    cout<<"                                         #                                #"<<endl;
+    cout<<"                                         ##################################"<<endl<<endl<<endl;
+
+    string i,id,id2,nm;
+
+    cout<<"\n\t\t\t\t\t  Entered Id Format Is : ###-###-###"<<endl<<endl;
+    cout<<"\t\t\t\t\t    Enter Student id: ";
+    cin>>i;
+
+    string file =  i + ".csv";
+    ifstream read;
+    read.open(file.c_str());
+    getline(read,nm,',');
+    getline(read,id,'\n');
+    //read.close();
+    if(i==nm||i==id)
+    {
+        cout<<"\n\t\t\t\t\t     Result File Already Exits!"<<endl;
+        cout<<"\n\t\t\t\t\t\tFor Add New Result\n\t\t\t\t\t    Please Go To Previous Menu"<<endl;
+        int c;
+        cout<<"\n\t\t\t\t\t          1.Previous Menu"<<endl;
+        cout<<"\t\t\t\t\t            2.Main Menu"<<endl;
+        cout<<"\n\t\t\t\t\t          Enter Choice: ";
+        cin>>c;
+        if(c==1)
+        {
+            system("cls");
+            Add_Result();
+
+        }
+        else
+        {
+            system("cls");
+            main();
+        }
+    }
+    else
+    {
+        int n; //n means numbers of subjects.
+        char na[100],Batch[100],Dept[100],Sec[100];
+        string ID;
+        char name[100],res[100]; // for add sub name and result.
+
+        string id="Id",nam="Name",Dep="Department",Bat="Batch",Sect="Sec";
+        ofstream file;
+        string fileName = i+".csv";
+        file.open(fileName.c_str(),ios::app);
 
 
+        file<<id<<","<<i<<endl;
+        cout<<"\n\t\t\t\t\t         Enter Your Name : ";
+        scanf(" %[^\n]s",na);
+        cout<<endl;
+        file<<nam<<","<<na<<endl;
+        cout<<"\t\t\t\t\t           Enter  Dept. : ";
+        scanf(" %[^\n]s",Dept);
+        cout<<endl;
+        file<<Dep<<","<<Dept<<endl;
+        cout<<"\t\t\t\t\t           Enter Batch : ";
+        scanf(" %[^\n]s",Batch);
+        cout<<endl;
+        file<<Bat<<","<<Batch<<endl;
+        cout<<"\t\t\t\t\t          Enter Sec : ";
+        scanf(" %[^\n]s",Sec);
+        cout<<endl;
+        file<<Sect<<","<<Sec<<endl;
+
+        cout<<"\n\n\t\t\t\t\tEnter Number of Subject For Add: ";
+        cin>>n;
+        for(int i=1; i<=n; i++)
+        {
+            cout<<"\n\n\t\t\t\t\t\tEnter Subject Name "<<i<<":";
+            scanf(" %[^\n]s",name);
+
+            cout<<endl;
+            cout<<"\t\t\t\t\t\tEnter Result  "<<i<<":";
+            scanf(" %[^\n]s",res);
+            cout<<endl;
+
+            file<<name<<","<<res<<endl;
+        }
+
+    }
+
+}
+//------------------------------------------------------------------------End Of Result Adding Part------------------------------------------------------------------------------------------------
 
 
 
@@ -293,7 +387,7 @@ void Admin_Login()
     {
     case 1:
         system("cls");
-   //     Add_Result();
+        Add_Result();
         break;
     case 2:
         system("cls");
