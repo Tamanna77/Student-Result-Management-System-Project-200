@@ -649,9 +649,95 @@ void Add_Result()
 
 
 
+/*                                                                     #################################
+                                                                       #    Modify_Result    Part      #
+                                                                       #################################  */
+//Add new result On Previous Result Sheet
+
+void Modify_Result()
+{
+    cout<<endl<<endl<<endl;
+    cout<<"                                      ################################## "<<endl;
+    cout<<"                                      #                                #"<<endl;
+    cout<<"                                      #  Fill This Information         #"<<endl;
+    cout<<"                                      #                                #"<<endl;
+    cout<<"                                      ##################################"<<endl<<endl<<endl;
 
 
+    string i,id,id2,nm;
 
+    cout<<"\n\t\t\t\t      Entered Id Format Is : ###-###-###"<<endl<<endl;
+    cout<<"\t\t\t\t\t Enter Student Id: ";
+    cin>>i;
+
+    string file =  i + ".csv";
+    ifstream read;
+    read.open(file.c_str());
+    getline(read,nm,',');
+    getline(read,id,'\n');
+
+    if(i==nm||i==id)
+    {
+        int n;
+        char name[100],res[100];
+
+        cout<<"\n\n\t\t\t\t\tEnter Number of Subject For Add: ";
+        cin>>n;
+
+        ofstream file;
+        string fileName = id+".csv";
+
+        file.open(fileName.c_str(),ios::app);
+
+        for(int i=1; i<=n; i++)
+        {
+            cout<<"\n\n\t\t\t\t\t\tEnter Subject "<<i<<":";
+            scanf(" %[^\n]s",name);
+
+            cout<<endl;
+            cout<<"\t\t\t\t\t\tEnter Result  "<<i<<":";
+            scanf(" %[^\n]s",res);
+            cout<<endl;
+
+            file<<name<<","<<res<<endl;
+        }
+        file.close();
+
+        int c;
+
+        cout<<"\n\t\t\t\t\t     Result Adding Successful "<<endl;
+        cout<<"\t\t\t\t\t       Enter  1 for Main Menu or 0 for Exit"<<endl;
+        cout<<"\n\t\t\t\t\t     Enter Choice: ";
+        cin>>c;
+        if(c==1)
+        {
+            system("cls");
+            main();
+
+        }
+        else
+        {
+            exit(0);
+        }
+    }
+    else
+    {
+        int ch;
+        cout<<"\n\n\t\t\t\t\t\tFile Not Exits"<<endl<<endl;
+        cout<<"\n\t\t\t\tEnter 1 For Search Id Again Or 0 For Main Menu"<<endl<<endl;
+        cout<<"\t\t\t\t\t\tEnter 0/1 : ";
+        cin>>ch;
+        if(ch==1)
+        {
+            system("cls");
+            Modify_Result();
+        }
+        else
+            main();
+    }
+
+}
+//                                                                       --------------------End Of Result Modifying Part-----------------------------------------------------------------------------------------
 
 
 
@@ -686,7 +772,7 @@ void Admin_Login()
         break;
     case 2:
         system("cls");
-      //  Modify_Result();
+        Modify_Result();
         break;
     case 3:
         system("cls");
