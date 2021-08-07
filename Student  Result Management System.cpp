@@ -1,31 +1,88 @@
 #include<bits/stdc++.h>
+#include <conio.h>
 using namespace std;
 void  Student_pass();
 void Stdnt_login();
 void Student_Panel();
+void Admin_Login();
 int main();
-/*                                                          ######################################
-                                                            #This Part For Login Boolean Function#
-                                                            ######################################
+/*                                                             #################################
+                                                                #          This Part For Login Boolean Function     #
+                                                                #################################
 */
 bool IsLoggedIn()
 {
-    string username, password, usrnm, pss;
+    const int maxpasslength = 8;
+    string username, usrnm,password, pss;
+
+    char ch, pass[maxpasslength];
+    int charposition = 0;
+
 
 
     cout<<endl<<endl<<endl<<endl;
     cout<<"\t\t\t       ##############################################################"<<endl;
     cout<<endl;
-    cout<<"\t\t\t       For Login Please Enter Your Valid Username And Password"<<endl;
+    cout<<"\t\t\t           For Login Please Enter Your Valid Username And Password"<<endl;
     cout<<endl;
     cout<<"\t\t\t       ##############################################################"<<endl;
     cout<<endl<<endl;
 
+
     cout<<"\t\t\t\t\t\t\tUserName :";
     cin>>username;
+
     cout<<"\t\t\t\t\t\t\tPassWord: ";
-    cin>>password;
-    cout<<endl;
+
+    //Start password handling part
+    while(1)
+    {
+
+        ch = getch();
+        if(ch==13)  //if user Hits ENTER BUTTON
+        {
+
+            break;
+
+        }
+        else if(ch==0)   //if user enter backspace
+        {
+
+            if(charposition > 0)
+            {
+                charposition--;
+                pass[charposition] = '\0';
+                printf("\b \b");
+            }
+
+        }
+        else if(ch == 31 || ch == 9)    //if user enter Space / Tab
+        {
+
+            continue;
+        }
+        else
+        {
+
+            if(charposition<maxpasslength)
+            {
+                pass[charposition] = ch;
+                charposition++;
+                cout<<"*";
+            }
+            else
+            {
+                cout<<"Your Password Length Exceeds Maximum Password Length"<<endl;
+                break;
+            }
+        }
+
+    }
+    pass[charposition] = '\0';
+    password = pass;
+
+    //End of password handling part
+
     ifstream readFile;
     string file =  username + ".txt";
     readFile.open(file.c_str());
@@ -33,7 +90,7 @@ bool IsLoggedIn()
     getline(readFile,pss);
     readFile.close();
 
-    if(usrnm == username && pss == password)
+    if(usrnm == username && password == pss)
     {
         return true;
     }
@@ -47,8 +104,8 @@ bool IsLoggedIn()
 
 
 /*                                                             #################################
-                                                               #This Part For After_Registration #
-                                                               ##################################
+                                                                #          This Part For After_Registration              #
+                                                                #################################
 */
 void After_reg()
 {
@@ -90,14 +147,18 @@ void After_reg()
 
 
 
-/*                                                            ###################################
-                                                              #This Part For Student_Registration#
-                                                              ####################################
+/*                                                             #################################
+                                                                #          This Part For Student_Registration         #
+                                                                #################################
 */
 void Stdnt_reg()
 {
-
     string username,password;
+    const int maxpasslength = 8;
+    char ch, pass[maxpasslength];
+    int charposition = 0;
+
+
     cout<<endl<<endl<<endl<<endl;
     cout<<"\t\t\t      ####################################################################"<<endl;
     cout<<endl;
@@ -110,8 +171,56 @@ void Stdnt_reg()
     cout<<"\t\t\t\t\t\t\tUserName : ";
     cin>>username;
     cout<<"\t\t\t\t\t\t\tPassWord: ";
-    cin>>password;
-    cout<<endl;
+
+    //Start password handling part
+    while(1)
+    {
+
+        ch = getch();
+        if(ch==13)  //if user Hits ENTER BUTTON
+        {
+
+            break;
+
+        }
+        else if(ch==0)   //if user enter backspace
+        {
+
+            if(charposition > 0)
+            {
+                charposition--;
+                pass[charposition] = '\0';
+                printf("\b \b");
+            }
+
+        }
+        else if(ch == 31 || ch == 9)    //if user enter Space / Tab
+        {
+
+            continue;
+        }
+        else
+        {
+
+            if(charposition<=maxpasslength)
+            {
+                pass[charposition] = ch;
+                charposition++;
+                cout<<"*";
+            }
+            else
+            {
+                cout<<"Your Password Length Exceeds Maximum Password Length"<<endl;
+                break;
+            }
+        }
+
+    }
+    pass[charposition] = '\0';
+    password = pass;
+
+    //End of password handling part
+
     /*
     save username and password as a txt file
     file save as user's username.
@@ -123,16 +232,17 @@ void Stdnt_reg()
     //username and password saving format
     file<< username << endl <<password;
     file.close();
-    cout<<"\t\t\t\t\t\t   Registration successfull"<<endl<<endl;
+    cout<<endl<<endl;
+    cout<<"\t\t\t\t\t\t    Registration successful"<<endl<<endl;
 
 }
 //-----------------------------------------------------------------    ----End Of Student Registration Part--------------------------------------------------------------------------------------------
 
 
 
-/*                                                              #################################
-                                                                # This Part For Student_Login   #
-                                                                #################################
+/*                                                             #################################
+                                                               # This Part For Student_Login   #
+                                                               #################################
 */
 void Stdnt_login()
 {
@@ -141,14 +251,15 @@ void Stdnt_login()
 
     if(status)
     {
-        cout<<"\t\t\t\t\t\t   Successfulluy Logged In"<<endl;
+        cout<<"\t\t\t\t\t\t   Successfully Logged In"<<endl;
 
         system("cls");
         Student_Panel();
     }
     else
     {
-        cout<<"\t\t\t\t\t\tInvalid Username  Or Password"<<endl<<endl;
+        cout<<endl<<endl;
+        cout<<"\t\t\t\t\t\t\tInvalid Username  Or Password"<<endl<<endl;
         cout<<"\t\t\t\t\t\t\t1.Try Again"<<endl<<endl;
         cout<<"\t\t\t\t\t\t\t2.Go to Main Menu"<<endl<<endl;
         cout<<"\t\t\t\t\t\t\t3.Close Application"<<endl<<endl;
@@ -159,7 +270,7 @@ void Stdnt_login()
         {
         case 1:
             system("cls");
-            Student_pass();
+            IsLoggedIn();
             break;
         case 2:
             system("cls");
@@ -195,8 +306,8 @@ void Stdnt_login()
 
 
 /*                                                             #################################
-                                                               #   This Part For Student_Pass  #
-                                                               #################################
+                                                                #          This Part For Student_Pass                        #
+                                                                #################################
 */
 void Student_pass()
 {
@@ -204,11 +315,11 @@ void Student_pass()
 
 
     cout<<endl<<endl<<endl<<endl;
-    cout<<"\t\t\t       ####################################################################"<<endl;
+    cout<<"\t\t\t      ####################################################################"<<endl;
     cout<<endl;
-    cout<<"\t\t\t          For See  Updates You Have To Registration and Login The System"<<endl;
+    cout<<"\t\t\t                               For See  Updates\n\t\t\t\t\tYou Have To Registration and Login The System"<<endl;
     cout<<endl;
-    cout<<"\t\t\t       ####################################################################"<<endl;
+    cout<<"\t\t\t      ####################################################################"<<endl;
     cout<<endl<<endl;
 
     cout<<"\t\t\t\t\t\t\t1: REGISTRATION"<<endl<<endl;
@@ -263,9 +374,110 @@ void Student_pass()
 
 
 
+
+/*                                                             #################################
+                                                                #          This Part For Student Result Saw        #
+                                                                #################################
+*/
+
+int Overall_Result()
+{
+    cout<<endl<<endl<<endl;
+
+    cout<<"                                                ################################## "<<endl;
+    cout<<"                                                #                                #"<<endl;
+    cout<<"                                                #     Fill Up This Information    #"<<endl;
+    cout<<"                                                #                                #"<<endl;
+    cout<<"                                                ##################################"<<endl<<endl<<endl;
+
+
+    string i,id,nm,user,usrn;
+    cout<<"\n\t\t\t\t\t\tEntered Id Format Is : ###-###-###"<<endl<<endl;
+    cout<<"\n\t\t\t\t\t\t   Enter Your Id :  ";
+    cin>>i;
+    string file =  i + ".csv";
+    ifstream read;
+    read.open(file.c_str());
+    getline(read,nm,',');
+    getline(read,id,'\n');
+
+    if(i==nm||i==id)
+    {
+        system("cls");
+        cout<<endl<<endl<<endl;
+        cout<<"                                            ################################## "<<endl;
+        cout<<"                                            #                                #"<<endl;
+        cout<<"                                            #  Here Is Your Overall Result   #"<<endl;
+        cout<<"                                            #                                #"<<endl;
+        cout<<"                                            ##################################"<<endl<<endl<<endl;
+
+        string subject,result;
+        ifstream readResult;
+        readResult.open(file.c_str());
+
+        while(readResult.good())
+        {
+            getline(readResult,subject,',') ;
+            getline(readResult,result,'\n') ;
+
+            cout<<"\n\t\t\t\t\t    "<<subject<<" -- "<<result;
+            cout<<endl;
+
+        }
+        readResult.close();
+
+        int c;
+
+        cout<<endl<<endl;
+        cout<<"\n\t\t\t\t\tEnter 1 For Main Menu 0 for Exit: ";
+        cin>>c;
+        if(c==1)
+        {
+            system("cls");
+            main();
+
+        }
+        else
+        {
+            exit(0);
+        }
+
+    }
+    else
+    {
+        int ch;
+        cout<<"\n\t\t\t\t\t               Invalid Id Format! Please Try Again"<<endl<<endl;
+        cout<<"\t\t\t\t\t         Enter 1 for Try Again, 2 for Main Menu Or 0 for Exit!"<<endl<<endl;
+
+        cout<<"\t\t\t\t\t                           Enter Choice:";
+        cin>>ch;
+
+        switch(ch)
+        {
+
+        case 1:
+            system("cls");
+            Overall_Result();
+            break;
+        case 2:
+            system("cls");
+            Student_Panel();
+        case 3:
+            break;
+        }
+    }
+
+
+} //                                                              --------------------End Of ResultShowing Part---------------------
+
+
+
+
+
+
 void Student_Panel()
 {
-      cout<<endl<<endl<<endl;
+    cout<<endl<<endl<<endl;
 
     cout<<"\t\t\t       ##############################################################"<<endl;
     cout<<endl;
@@ -285,7 +497,7 @@ void Student_Panel()
     {
     case 1:
         system("cls");
-//        Overall_Result();
+        Overall_Result();
         break;
     case 2:
         system("cls");
@@ -320,10 +532,6 @@ void Student_Panel()
 
 
 
-/*                                                                     #################################
-                                                                       #  Result Adding Part For Admin  #
-                                                                       #################################  */
-
 void Add_Result()
 {
     cout<<endl<<endl;
@@ -350,9 +558,9 @@ void Add_Result()
         cout<<"\n\t\t\t\t\t     Result File Already Exits!"<<endl;
         cout<<"\n\t\t\t\t\t\tFor Add New Result\n\t\t\t\t\t    Please Go To Previous Menu"<<endl;
         int c;
-        cout<<"\n\t\t\t\t\t          1.Previous Menu"<<endl;
-        cout<<"\t\t\t\t\t            2.Main Menu"<<endl;
-        cout<<"\n\t\t\t\t\t          Enter Choice: ";
+        cout<<"\n\t\t\t\t\t          1.Try With New ID"<<endl;
+        cout<<"\t\t\t\t\t           2.Main Menu"<<endl;
+        cout<<"\n\t\t\t\t\t         Enter Choice: ";
         cin>>c;
         if(c==1)
         {
@@ -369,6 +577,7 @@ void Add_Result()
     else
     {
         int n; //n means numbers of subjects.
+
         char na[100],Batch[100],Dept[100],Sec[100];
         string ID;
         char name[100],res[100]; // for add sub name and result.
@@ -380,19 +589,19 @@ void Add_Result()
 
 
         file<<id<<","<<i<<endl;
-        cout<<"\n\t\t\t\t\t         Enter  Name : ";
+        cout<<"\n\t\t\t\t\t         Enter Name : ";
         scanf(" %[^\n]s",na);
         cout<<endl;
         file<<nam<<","<<na<<endl;
-        cout<<"\t\t\t\t\t           Enter Dept. : ";
+        cout<<"\t\t\t\t\t         Enter Dept. : ";
         scanf(" %[^\n]s",Dept);
         cout<<endl;
         file<<Dep<<","<<Dept<<endl;
-        cout<<"\t\t\t\t\t           Enter Batch : ";
+        cout<<"\t\t\t\t\t         Enter Batch : ";
         scanf(" %[^\n]s",Batch);
         cout<<endl;
         file<<Bat<<","<<Batch<<endl;
-        cout<<"\t\t\t\t\t          Enter Sec : ";
+        cout<<"\t\t\t\t\t         Enter Sec : ";
         scanf(" %[^\n]s",Sec);
         cout<<endl;
         file<<Sect<<","<<Sec<<endl;
@@ -401,7 +610,7 @@ void Add_Result()
         cin>>n;
         for(int i=1; i<=n; i++)
         {
-            cout<<"\n\n\t\t\t\t\t\tEnter Subject Name "<<i<<":";
+            cout<<"\n\n\t\t\t\t\t\tEnter Subject "<<i<<":";
             scanf(" %[^\n]s",name);
 
             cout<<endl;
@@ -412,6 +621,27 @@ void Add_Result()
             file<<name<<","<<res<<endl;
         }
 
+
+        file.close();
+
+        int c;
+
+        cout<<"\n\t\t\t\t\t     Result Adding Successful "<<endl;
+        cout<<"\t\t\t\t\t       Enter  1 for Main Menu or 0 for Exit"<<endl;
+        cout<<"\n\t\t\t\t\t     Enter Choice: ";
+        cin>>c;
+        if(c==1)
+        {
+            system("cls");
+            main();
+
+        }
+        else
+        {
+            exit(0);
+        }
+
+
     }
 
 }
@@ -419,8 +649,14 @@ void Add_Result()
 
 
 
+
+
+
+
+
+
 /*                                                                     #################################
-                                                                       #      Admin_Login  Part         #
+                                                                       # Admin_Login  Part             #
                                                                        #################################  */
 void Admin_Login()
 {
@@ -434,7 +670,7 @@ void Admin_Login()
     int ch;
 
     cout<<"\t\t\t\t\t           1. Add  Result For New Student"<<endl<<endl;
-    cout<<"\t\t\t\t\t           2. Modify Previous Result"<<endl<<endl;
+    cout<<"\t\t\t\t\t           2. Add New Result in Previous Result"<<endl<<endl;
     cout<<"\t\t\t\t\t           3. Delete Any Record"<<endl<<endl;
     cout<<"\t\t\t\t\t           4. Change Admin Password"<<endl<<endl;
     cout<<"\t\t\t\t\t           5. Go To Main Menu"<<endl<<endl;
@@ -450,15 +686,15 @@ void Admin_Login()
         break;
     case 2:
         system("cls");
-//        Modify_Result();
+      //  Modify_Result();
         break;
     case 3:
         system("cls");
-//        Delete_Any_Record();
+       // Delete_Any_Record();
         break;
     case 4:
         system("cls");
-//        Change_Admin_Pass();
+       // Change_Admin_Pass();
         break;
     case 5:
         system("cls");
@@ -487,17 +723,71 @@ void Admin_Login()
 
 
 /*                                                                     #################################
-                                                                        #    Admin_Pass  Part         #
+                                                                       #        Admin_Pass  Part       #
                                                                        #################################  */
 void Admin_pass()
 {
-    string c,ch;
+    string password,pss;
+    const int maxpasslength = 8;
+    char ch, pass[maxpasslength];
+    int charposition = 0;
+
     cout<<"\n\t\t\t\t\t           Enter Pass: ";
-    cin>>c;
-    ifstream pass;
-    pass.open("Admin_pass.txt");
-    getline(pass,ch);
-    if(ch==c)
+
+    //Start password handling part
+
+    while(1)
+    {
+
+        ch = getch();
+        if(ch==13)  //if user Hits ENTER BUTTON
+        {
+
+            break;
+
+        }
+        else if(ch==0)   //if user enter backspace
+        {
+
+            if(charposition > 0)
+            {
+                charposition--;
+                pass[charposition] = '\0';
+                printf("\b \b");
+            }
+
+        }
+        else if(ch == 31 || ch == 9)    //if user enter Space / Tab
+        {
+
+            continue;
+        }
+        else
+        {
+
+            if(charposition<maxpasslength)
+            {
+                pass[charposition] = ch;
+                charposition++;
+                cout<<"*";
+            }
+            else
+            {
+                cout<<"Your Password Length Exceeds Maximum Password Length"<<endl;
+                break;
+            }
+        }
+
+    }
+    pass[charposition] = '\0';
+    password = pass;
+
+    //end of password handling part
+
+    ifstream pas;
+    pas.open("Admin_pass.txt");
+    getline(pas,pss);
+    if(pss==password)
     {
         system("cls");
         Admin_Login();
@@ -505,7 +795,8 @@ void Admin_pass()
     else
     {
 
-        cout<<"\t\t\t\t\tInvalid Password! Please try agin!!!"<<endl<<endl;
+        cout<<endl;
+        cout<<"\t\t\t\t\tInvalid Password! Please try again!!!"<<endl<<endl;
         Admin_pass();
 
     }
@@ -560,4 +851,5 @@ int main()
             break;
         }
     }
+
 }
